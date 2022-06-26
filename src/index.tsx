@@ -8,13 +8,16 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-function Clock(props: {date: Date}) {
-  return (
-    <div>
-      <h1>Hello, World!</h1>
-      <h2>It is {props.date.toLocaleTimeString()}.</h2>
-    </div>
-  );
+// React.Component<Props,State>
+class Clock extends React.Component<{date: Date}, {}> {
+  render() {
+    return (
+      <div>
+        <h1>Hello, World!</h1>
+        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
 }
 
 function tick() {
