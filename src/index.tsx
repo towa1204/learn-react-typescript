@@ -8,22 +8,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-type User = {firstName: string, lastName: string};
-
-function formatName(user: User) {
-  return user.firstName + ' ' + user.lastName;
-}
-
-const user = {
-  firstName: 'Harper',
-  lastName: 'Perez',
-};
-
-const element = (
-  <h1>
-    Hello, {formatName(user)}!
-  </h1>
-);
+const element = <h1>Hello, World</h1>;
 
 root.render(element);
 
