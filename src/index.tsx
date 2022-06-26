@@ -8,23 +8,24 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+type ClockState = {date: Date};
 // React.Component<Props,State>
-class Clock extends React.Component<{date: Date}, {}> {
+class Clock extends React.Component<{}, ClockState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {date: new Date()};
+  }
   render() {
     return (
       <div>
         <h1>Hello, World!</h1>
-        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
 }
 
-function tick() {
-  root.render(<Clock date={new Date()}/>);
-}
-
-setInterval(tick, 1000);
+root.render(<Clock />);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
