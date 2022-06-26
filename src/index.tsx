@@ -15,24 +15,38 @@ function formatDate(date: Date) {
 type CommentObj = {
   date: Date,
   text: string,
-  author: {
-    name: string,
-    avatarUrl: string,
-  },
+  author: User,
 };
+
+type User = {
+  avatarUrl: string,
+  name: string,
+};
+
+function Avatar(props: {user: User}) {
+  return (
+    <img className="Avatar"
+      src={props.user.avatarUrl}
+      alt={props.user.name}
+    />
+  );
+}
+
+function UserInfo(props: {user: User}) {
+  return (
+    <div className="UserInfo">
+      <Avatar user={props.user} />
+      <div className="UserInfo-name">
+        {props.user.name}
+      </div>
+    </div>
+  );
+}
 
 function Comment(props: CommentObj) {
   return (
     <div className="Comment">
-      <div className="UserInfo">
-        <img className="Avatar"
-          src={props.author.avatarUrl}
-          alt={props.author.name}
-        />
-        <div className="UserInfo-name">
-          {props.author.name}
-        </div>
-      </div>
+      <UserInfo user={props.author} />
       <div className="Comment-text">
         {props.text}
       </div>
