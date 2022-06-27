@@ -8,6 +8,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+function FormattedDate(props: {date: Date}) {
+  return <h2>It is {props.date.toLocaleTimeString()}.</h2>
+}
+
 type ClockState = {date: Date};
 // React.Component<Props,State>
 class Clock extends React.Component<{}, ClockState> {
@@ -18,7 +22,8 @@ class Clock extends React.Component<{}, ClockState> {
 
   componentDidMount(this: {timerID: NodeJS.Timer, tick: () => void}) {
     this.timerID = setInterval(
-      () => this.tick()
+      () => this.tick(),
+      1000
     );
   }
 
@@ -36,7 +41,7 @@ class Clock extends React.Component<{}, ClockState> {
     return (
       <div>
         <h1>Hello, World!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        <FormattedDate date={this.state.date} />
       </div>
     );
   }
