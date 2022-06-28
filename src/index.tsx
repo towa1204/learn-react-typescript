@@ -8,30 +8,23 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-class Toggle extends React.Component<{}, {isToggleOn: boolean}> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {isToggleOn: true};
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
-
-  render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-      </button> 
-    );
-  }
+function UserGreeting(props: {}) {
+  return <h1>Welcome back!</h1>;
 }
 
-root.render(<Toggle />);
+function GuestGreeting(props:{}) {
+  return <h1>Please Sign Up.</h1>;
+}
+
+function Greeting(props: {isLoggedIn: boolean}) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+root.render(<Greeting isLoggedIn={false}/>);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
