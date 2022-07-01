@@ -8,25 +8,37 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-function ListItem(props: {value: number}) {
-  // Correct! There is no need to specify the key here:
-  return <li>{props.value}</li>;
-}
+class NameForm extends React.Component<{}, {value: string}> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {value: ''};
 
-function NumberList(props: {numbers: number[]}) {
-  const numbers = props.numbers;
-  return (
-    <ul>
-      {numbers.map((number) =>
-        <ListItem key={number.toString()}
-                  value={number} />
-      )}
-    </ul>
-  );
-}
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-const numbers = [1, 2, 3, 4, 5];
-root.render(<NumberList numbers={numbers} />);
+  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="submit" />
+      </form>
+    );
+  }
+}
+root.render(<NameForm />);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
